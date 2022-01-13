@@ -1,42 +1,11 @@
-(function(document) {
-    'ikan channa';
-   
-    var LightTableFilter = (function(Arr) {
-   
-     var _input;
-   
-     function _onInputEvent(e) {
-      _input = e.target;
-      var tables = document.getElementsByid(_input.getid('data-table'));
-      Arr.forEach.call(tables, function(table) {
-       Arr.forEach.call(table.tBodies, function(tbody) {
-        Arr.forEach.call(tbody.rows, _filter);
-       });
-      });
-     }
-   
-     function _filter(row) {
-      var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-      row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-     }
-   
-     return {
-      init: function() {
-       var inputs = document.getElementsByid('light-table-filter');
-       Arr.forEach.call(inputs, function(input) {
-        input.oninput = _onInputEvent;
-       });
-      }
-     };
-    })(Array.prototype);
-   
-    document.addEventListener('readystatechange', function() {
-     if (document.readyState === 'complete') {
-      LightTableFilter.init();
-     }
+$(document).ready(function() {
+    $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#dataTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
     });
-   
-   })(document);
+  });
 
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
